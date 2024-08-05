@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using System;
 using Discord.Net;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Configuration;
 using DCPlaylistBot;
 
 public class DCBot {
@@ -16,9 +15,9 @@ public class DCBot {
 
         _client.Log += Log;
 
-        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        IConfiguration configuration = configurationBuilder.AddUserSecrets<DCBot>().Build();
-        string token = configuration.GetSection("DC_Key")["DC_Key"];
+        string token = Environment.GetEnvironmentVariable("BeatSaberDCBot");
+
+        Plugin.Log.Error("Token " + token);
 
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
