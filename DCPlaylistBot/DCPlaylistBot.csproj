@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
+    <Compile Include="Commands\ReloadCommand.cs" />
     <Compile Include="DCBot.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />

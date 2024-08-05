@@ -32,6 +32,7 @@ public class AddCommand {
                 l.RefreshSongs();
             } else {
                 await command.RespondAsync("Please wait until I'm in menu");
+                return;
             }
 
 

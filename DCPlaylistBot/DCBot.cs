@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using System;
 using Discord.Net;
 using Newtonsoft.Json;
-using DCPlaylistBot;
 
 public class DCBot {
 
@@ -16,8 +15,6 @@ public class DCBot {
         _client.Log += Log;
 
         string token = Environment.GetEnvironmentVariable("BeatSaberDCBot");
-
-        Plugin.Log.Error("Token " + token);
 
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
@@ -39,8 +36,14 @@ public class DCBot {
             .WithDescription("Add a song to download")
             .AddOption("linkorid", ApplicationCommandOptionType.String, "The link or the ID of the song you want to add", isRequired: true);
 
+        SlashCommandBuilder reloadCommand = new SlashCommandBuilder()
+            .WithName("reload")
+            .WithDescription("Reloads my song list");
+            
+
         try {
             await _client.CreateGlobalApplicationCommandAsync(addCommand.Build());
+            await _client.CreateGlobalApplicationCommandAsync(reloadCommand.Build());
         } catch (HttpException exception) {
             string json = JsonConvert.SerializeObject(exception.Errors, Formatting.Indented);
             Console.WriteLine(json);

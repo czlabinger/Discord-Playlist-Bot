@@ -7,6 +7,9 @@ public class CommandHandler {
             case "add":
                 await AddCommand.HandleAddCommand(command);
                 break;
+            case "reload":
+                await ReloadCommand.HandleReloadCommand(command);
+                break;
         }
     }
 }
