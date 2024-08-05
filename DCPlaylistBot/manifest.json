@@ -1,0 +1,16 @@
+﻿{
+    "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
+    "id": "DCPlaylistBot",
+    "name": "DCPlaylistBot",
+    "author": "Stoffi05",
+    "version": "0.0.1",
+    "description": "Add songs to playlist via discord",
+    "gameVersion": "1.18.3",
+    "dependsOn": {
+        "BSIPA": "^4.2.0",
+        "PlaylistManager": "^1.7.0",
+        "BeatSaberPlaylistsLib": "^1.7.0",
+        "SongCore": "^3.14.11",
+        "BeatSaverSharp": "^3.4.4",
+    }
+}
