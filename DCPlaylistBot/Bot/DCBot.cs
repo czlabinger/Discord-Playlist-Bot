@@ -31,19 +31,11 @@ public class DCBot {
 
     private async Task Create_Slash_Command() {
 
-        SlashCommandBuilder addCommand = new SlashCommandBuilder()
-            .WithName("add")
-            .WithDescription("Add a song to download")
-            .AddOption("linkorid", ApplicationCommandOptionType.String, "The link or the ID of the song you want to add", isRequired: true);
-
-        SlashCommandBuilder reloadCommand = new SlashCommandBuilder()
-            .WithName("reload")
-            .WithDescription("Reloads my song list");
-            
-
         try {
-            await _client.CreateGlobalApplicationCommandAsync(addCommand.Build());
-            await _client.CreateGlobalApplicationCommandAsync(reloadCommand.Build());
+            foreach(SlashCommandBuilder s in SlashCommandCreator.GetSlashCommandBuilders()) {
+                await _client.CreateGlobalApplicationCommandAsync(s.Build());
+            }
+
         } catch (HttpException exception) {
             string json = JsonConvert.SerializeObject(exception.Errors, Formatting.Indented);
             Console.WriteLine(json);

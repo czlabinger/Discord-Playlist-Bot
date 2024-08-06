@@ -120,10 +120,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bot\SlashCommandCreator.cs" />
     <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
     <Compile Include="Commands\ReloadCommand.cs" />
-    <Compile Include="DCBot.cs" />
+    <Compile Include="Bot\DCBot.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
     <Compile Include="DCPlaylistBotController.cs" />

@@ -27,14 +27,12 @@ public class AddCommand {
             byte[] zip = await beatmap.LatestVersion.DownloadZIP();
             ZipExtractor.ExtractZipFromByteArray(zip, "G:\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels\\" + songID + " (" + beatmap.Name + " - " + beatmap.Uploader.Name + ")");
 
-            Loader l = Loader.Instance;
-            if (l != null) {
-                l.RefreshSongs();
+            if (Loader.Instance != null) {
+                Loader.Instance.RefreshSongs();
             } else {
                 await command.RespondAsync("Please wait until I'm in menu");
                 return;
             }
-
 
             await command.RespondAsync("Downloading " + beatmap.Name + " - " + beatmap.Uploader.Name);
 
