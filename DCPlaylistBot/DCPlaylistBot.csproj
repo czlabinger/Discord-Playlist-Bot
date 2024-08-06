@@ -43,7 +43,7 @@
     <DisableZipRelease>True</DisableZipRelease>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BeatSaberPlaylistsLib, Version=1.6.7.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BeatSaberPlaylistsLib, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Libs\BeatSaberPlaylistsLib.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>

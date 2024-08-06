@@ -4,6 +4,9 @@ using BeatSaverSharp.Models;
 using System.Linq;
 using System;
 using SongCore;
+using PlaylistManager.Utilities;
+using BeatSaberPlaylistsLib.Types;
+using System.Text.RegularExpressions;
 
 public class AddCommand {
 
@@ -20,12 +23,14 @@ public class AddCommand {
                 songID = songLinkOrID;
             }
 
-            //IPlaylist playlist = PlaylistLibUtils.CreatePlaylist("Discord queue", "DC Queue", DCPlaylistBot.Plugin.playlistManager, true, false);
+            IPlaylist playlist = PlaylistLibUtils.playlistManager.GetPlaylist("DiscordQueue");
 
             Beatmap beatmap = await DCPlaylistBot.Plugin.beatSaver.Beatmap(songID);
 
+            string folderName = @"G:\Steam\steamapps\common\Beat Saber\Beat Saber_Data\CustomLevels\" + Regex.Replace(songID + " (" + beatmap.Name + " - " + beatmap.Uploader.Name + ")", @"[\\\/\:\*\?\""\<\>\|]", "");
+
             byte[] zip = await beatmap.LatestVersion.DownloadZIP();
-            ZipExtractor.ExtractZipFromByteArray(zip, "G:\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels\\" + songID + " (" + beatmap.Name + " - " + beatmap.Uploader.Name + ")");
+            ZipExtractor.ExtractZipFromByteArray(zip, folderName);
 
             if (Loader.Instance != null) {
                 Loader.Instance.RefreshSongs();
@@ -33,24 +38,14 @@ public class AddCommand {
                 await command.RespondAsync("Please wait until I'm in menu");
                 return;
             }
+            
+            (string, BeatmapLevel)? beatmapLevel = Loader.LoadCustomLevel(folderName);
 
-            await command.RespondAsync("Downloading " + beatmap.Name + " - " + beatmap.Uploader.Name);
-
-            /*
-            (string, BeatmapLevel)? beatmapLevel = SongCore.Loader.LoadCustomLevel(@"G:\Steam\steamapps\common\Beat Saber\Beat Saber_Data\CustomLevels\" + songID + "(" + beatmap.Name + " - " + beatmap.Uploader.Name + ")");
-
-            if (beatmapLevel == null) {
-                await command.RespondAsync("null");
-            } else {
-                await command.RespondAsync("yay");
-            }
-
-            await command.RespondAsync("string: " + beatmapLevel.Value.Item1);
-
-            playlist.Add(beatmapLevel.Value.Item2);
+            IPlaylistSong s = playlist.Add(beatmapLevel.Value.Item2);
             playlist.RaisePlaylistChanged();
 
-            await command.RespondAsync("Added " + beatmap.Name + " mapped by " + beatmap.Uploader.Name +  " to playlist");*/
+
+            await command.RespondAsync("Added " + beatmap.Name + " mapped by " + beatmap.Uploader.Name +  " to playlist");
         } catch(Exception e) {
             await command.RespondAsync("Error: " + e);
             throw e;
