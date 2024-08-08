@@ -1,3 +1,5 @@
+# This is very early in development it can crash/not work
+
 # Discord-Playlist-Bot
 
 This Beat Saber plugin is a Discord bot that downloads a song that was added by `/add <BeatSaver ID or BeatSaver link>` to a Playlist.

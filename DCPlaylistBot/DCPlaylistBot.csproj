@@ -129,6 +129,7 @@
     <Compile Include="Configuration\PluginConfig.cs" />
     <Compile Include="DCPlaylistBotController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\QueueButton.cs" />
     <Compile Include="Util\ZipExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
