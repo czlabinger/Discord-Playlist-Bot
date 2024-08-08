@@ -25,6 +25,10 @@ public class AddCommand {
 
             IPlaylist playlist = PlaylistLibUtils.playlistManager.GetPlaylist("DiscordQueue");
 
+            if (playlist == null) {
+                playlist = PlaylistLibUtils.CreatePlaylist("DiscordQueue", "DCBot", DCPlaylistBot.Plugin.playlistManager, allowDups: false);
+            }
+
             Beatmap beatmap = await DCPlaylistBot.Plugin.beatSaver.Beatmap(songID);
 
             string folderName = @"G:\Steam\steamapps\common\Beat Saber\Beat Saber_Data\CustomLevels\" + Regex.Replace(songID + " (" + beatmap.Name + " - " + beatmap.Uploader.Name + ")", @"[\\\/\:\*\?\""\<\>\|]", "");
